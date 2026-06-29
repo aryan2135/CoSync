@@ -42,7 +42,7 @@ if (!process.env.COLLAB_JWT_SECRET) {
   }
 }
 
-const PORT = 3001;
+const PORT = Number(process.env.PORT) || 3001;
 const JWT_SECRET = process.env.COLLAB_JWT_SECRET || "dev-collab-secret-change-me";
 const INTERNAL_SECRET = process.env.INTERNAL_SECRET || "dev-internal-secret-change-me";
 const APP_BASE = process.env.APP_BASE || "http://localhost:3000";
@@ -335,7 +335,7 @@ function cleanupConnection(ws: WebSocket, payload: JwtPayload | null) {
   }
 }
 
-httpServer.listen(PORT, () => { console.log(`✓ CoSync collab service on ws://localhost:${PORT} (path /)`); });
+httpServer.listen(PORT, "0.0.0.0", () => { console.log(`✓ CoSync collab service on port ${PORT} (path /)`); });
 
 const shutdown = async (sig: string) => {
   console.log(`\n[${sig}] flushing ${docs.size} doc(s)…`);
