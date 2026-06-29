@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ArrowLeft, History, Sparkles, Share2, Users, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,7 @@ type DocDetail = {
 };
 
 export function EditorWorkspace({ documentId }: { documentId: string }) {
+  const qc = useQueryClient();
   const closeDocument = useUiStore((s) => s.closeDocument);
   const editorPanel = useUiStore((s) => s.editorPanel);
   const setEditorPanel = useUiStore((s) => s.setEditorPanel);
@@ -84,6 +85,8 @@ export function EditorWorkspace({ documentId }: { documentId: string }) {
       });
       if (!res.ok) throw new Error();
       setTitleDirty(false);
+      qc.invalidateQueries({ queryKey: ["document", documentId] });
+      qc.invalidateQueries({ queryKey: ["documents"] });
     } catch { toast.error("Could not save title"); }
   };
 
