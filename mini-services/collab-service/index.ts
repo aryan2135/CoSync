@@ -72,16 +72,16 @@ function base64UrlDecode(s: string): string {
 
 function verifyToken(token: string): JwtPayload | null {
   const parts = token.split(".");
-  if (parts.length !== 3) return null;
+  if (parts.length !== 3) { console.warn("[auth] Invalid JWT parts:", parts.length); return null; }
   const [headerB64, payloadB64, sigB64] = parts;
   const signingInput = `${headerB64}.${payloadB64}`;
   const expectedSig = createHmac("sha256", JWT_SECRET).update(signingInput).digest("base64url");
-  if (expectedSig !== sigB64) return null;
+  if (expectedSig !== sigB64) { console.warn("[auth] Signature mismatch. Received:", sigB64, "Expected:", expectedSig, "using secret:", JWT_SECRET.slice(0, 5) + "..."); return null; }
   try {
     const payload = JSON.parse(base64UrlDecode(payloadB64)) as JwtPayload;
-    if (payload.exp && Date.now() >= payload.exp * 1000) return null;
+    if (payload.exp && Date.now() >= payload.exp * 1000) { console.warn("[auth] Token expired"); return null; }
     return payload;
-  } catch { return null; }
+  } catch (e) { console.warn("[auth] JSON parse error:", e); return null; }
 }
 
 async function persistDoc(documentId: string, doc: Y.Doc) {
