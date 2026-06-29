@@ -17,10 +17,10 @@ export function AppFooter() {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-muted-foreground">
-            Built by <span className="font-medium text-foreground">Your Name</span>
+            Built by <span className="font-medium text-foreground">Aryan Dongre</span>
           </span>
           <Link
-            href="https://github.com/your-username"
+            href="https://github.com/aryan2135"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
@@ -30,7 +30,7 @@ export function AppFooter() {
             <span className="hidden sm:inline">GitHub</span>
           </Link>
           <Link
-            href="https://www.linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/aryan-dongre-29b858313/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"

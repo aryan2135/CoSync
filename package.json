@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-    "start": "NODE_ENV=production bun .next/standalone/server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node .next/standalone/server.js",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "db:push": "prisma db push",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset",
-    "collab": "cd mini-services/collab-service && bun run dev"
+    "db:push": "npx prisma db push",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev",
+    "db:reset": "npx prisma migrate reset",
+    "collab": "cd mini-services/collab-service && npm run dev"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^3.0.1",
@@ -61,6 +61,7 @@
     "@tiptap/pm": "^3.27.1",
     "@tiptap/react": "^3.27.1",
     "@tiptap/starter-kit": "^3.27.1",
+    "@tiptap/y-tiptap": "^3.0.5",
     "ai": "^7.0.4",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",

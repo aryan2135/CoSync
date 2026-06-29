@@ -119,11 +119,9 @@ prisma/
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [your-profile](https://www.linkedin.com/in/your-profile)
-
-> ⚠️ **Before submission:** Replace the placeholder name and URLs above and in `src/components/app-footer.tsx` and `src/components/landing/landing-page.tsx` with your real details.
+**Aryan Dongre**
+- GitHub: [@aryan2135](https://github.com/aryan2135)
+- LinkedIn: [aryan-dongre-29b858313](https://www.linkedin.com/in/aryan-dongre-29b858313/)
 
 ---
 

@@ -124,9 +124,9 @@ export function LandingPage({ onAuth }: Props) {
             <span><span className="font-medium text-foreground">CoSync</span> · Local-First Collaborative Editor</span>
           </div>
           <div className="flex items-center gap-4">
-            <span>Built by <span className="font-medium text-foreground">Your Name</span></span>
-            <Link href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="GitHub profile"><Github className="h-4 w-4" /></Link>
-            <Link href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="LinkedIn profile"><Linkedin className="h-4 w-4" /></Link>
+            <span>Built by <span className="font-medium text-foreground">Aryan Dongre</span></span>
+            <Link href="https://github.com/aryan2135" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="GitHub profile"><Github className="h-4 w-4" /></Link>
+            <Link href="https://www.linkedin.com/in/aryan-dongre-29b858313/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="LinkedIn profile"><Linkedin className="h-4 w-4" /></Link>
           </div>
         </div>
       </footer>

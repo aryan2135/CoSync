@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   // Dev: sqlite. Prod: postgresql (set provider via env or swap here before `prisma migrate`).
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

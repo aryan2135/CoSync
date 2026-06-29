@@ -13,6 +13,34 @@ import * as awarenessProtocol from "y-protocols/awareness";
 import { Awareness } from "y-protocols/awareness";
 import * as encoding from "lib0/encoding";
 import * as decoding from "lib0/decoding";
+import { readFileSync, existsSync } from "node:fs";
+import { resolve } from "node:path";
+
+// Auto-load parent .env file if running in standalone Node environment
+if (!process.env.COLLAB_JWT_SECRET) {
+  const envPaths = [resolve(process.cwd(), ".env"), resolve(process.cwd(), "../../.env"), resolve(process.cwd(), "../.env")];
+  for (const envPath of envPaths) {
+    if (existsSync(envPath)) {
+      try {
+        const content = readFileSync(envPath, "utf8");
+        for (const line of content.split("\n")) {
+          const trimmed = line.trim();
+          if (!trimmed || trimmed.startsWith("#")) continue;
+          const eqIdx = trimmed.indexOf("=");
+          if (eqIdx > 0) {
+            const key = trimmed.slice(0, eqIdx).trim();
+            let val = trimmed.slice(eqIdx + 1).trim();
+            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+              val = val.slice(1, -1);
+            }
+            if (!process.env[key]) process.env[key] = val;
+          }
+        }
+      } catch {}
+      break;
+    }
+  }
+}
 
 const PORT = 3001;
 const JWT_SECRET = process.env.COLLAB_JWT_SECRET || "dev-collab-secret-change-me";

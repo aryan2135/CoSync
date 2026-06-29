@@ -43,7 +43,14 @@ export function useCollabProvider(opts: Options): CollabProvider {
   const mountedRef = React.useRef(true);
 
   const buildWsUrl = React.useCallback((): string => {
+    if (process.env.NEXT_PUBLIC_COLLAB_URL) {
+      return process.env.NEXT_PUBLIC_COLLAB_URL;
+    }
     const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return `${proto}//${hostname}:3001`;
+    }
     const host = window.location.host;
     return `${proto}//${host}/?XTransformPort=3001`;
   }, []);

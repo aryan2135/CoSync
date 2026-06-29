@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot index.ts",
-    "start": "bun index.ts"
+    "dev": "node --watch index.ts",
+    "start": "node index.ts"
   },
   "dependencies": {
     "lib0": "^0.2.117",
