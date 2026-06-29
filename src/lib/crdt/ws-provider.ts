@@ -193,38 +193,43 @@ export class CollabWSProvider {
   }
 
   private handleMessage(data: Uint8Array) {
-    const decoder = decoding.createDecoder(data);
-    const messageType = decoding.readVarUint(decoder);
-    const encoder = encoding.createEncoder();
+    if (!data || data.length === 0) return;
+    try {
+      const decoder = decoding.createDecoder(data);
+      const messageType = decoding.readVarUint(decoder);
+      const encoder = encoding.createEncoder();
 
-    switch (messageType) {
-      case messageSync: {
-        encoding.writeVarUint(encoder, messageSync);
-        sync.readSyncMessage(decoder, encoder, this.doc, this);
-        if (encoding.length(encoder) > 0) {
-          this.ws?.send(encoding.toUint8Array(encoder));
+      switch (messageType) {
+        case messageSync: {
+          encoding.writeVarUint(encoder, messageSync);
+          sync.readSyncMessage(decoder, encoder, this.doc, this);
+          if (encoding.length(encoder) > 0) {
+            this.ws?.send(encoding.toUint8Array(encoder));
+          }
+          if (!this.isSynced) {
+            this.isSynced = true;
+            this.setStatus("connected");
+            this.onSynced?.();
+          }
+          break;
         }
-        if (!this.isSynced) {
-          this.isSynced = true;
-          this.setStatus("connected");
-          this.onSynced?.();
+        case messageAwareness: {
+          awarenessProtocol.applyAwarenessUpdate(this.awareness, decoding.readVarUint8Array(decoder), this);
+          break;
         }
-        break;
+        case messageQueryAwareness: {
+          const states = [...this.awareness.getStates().keys()];
+          const update = awarenessProtocol.encodeAwarenessUpdate(this.awareness, states);
+          const enc = encoding.createEncoder();
+          encoding.writeVarUint(enc, messageAwareness);
+          encoding.writeVarUint8Array(enc, update);
+          this.ws?.send(encoding.toUint8Array(enc));
+          break;
+        }
+        default: break;
       }
-      case messageAwareness: {
-        awarenessProtocol.applyAwarenessUpdate(this.awareness, decoding.readVarUint8Array(decoder), this);
-        break;
-      }
-      case messageQueryAwareness: {
-        const states = [...this.awareness.getStates().keys()];
-        const update = awarenessProtocol.encodeAwarenessUpdate(this.awareness, states);
-        const enc = encoding.createEncoder();
-        encoding.writeVarUint(enc, messageAwareness);
-        encoding.writeVarUint8Array(enc, update);
-        this.ws?.send(encoding.toUint8Array(enc));
-        break;
-      }
-      default: break;
+    } catch (err) {
+      console.warn("[ws-provider] Malformed message ignored:", err);
     }
   }
 
