@@ -3,7 +3,7 @@
 import * as React from "react";
 import {
   FileText, WifiOff, GitBranch, History, Users, Sparkles, Shield,
-  ArrowRight, Github, Linkedin,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -116,20 +116,6 @@ export function LandingPage({ onAuth }: Props) {
           <Button size="lg" variant="secondary" onClick={onAuth} className="mt-6">Get started — it&apos;s free<ArrowRight className="ml-2 h-4 w-4" /></Button>
         </div>
       </section>
-
-      <footer className="mt-auto border-t border-border/60 bg-background">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6">
-          <div className="flex items-center gap-2">
-            <FileText className="h-4 w-4 text-primary" aria-hidden />
-            <span><span className="font-medium text-foreground">CoSync</span> · Local-First Collaborative Editor</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span>Built by <span className="font-medium text-foreground">Aryan Dongre</span></span>
-            <Link href="https://github.com/aryan2135" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="GitHub profile"><Github className="h-4 w-4" /></Link>
-            <Link href="https://www.linkedin.com/in/aryan-dongre-29b858313/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground" aria-label="LinkedIn profile"><Linkedin className="h-4 w-4" /></Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
