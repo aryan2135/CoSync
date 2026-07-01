@@ -22,8 +22,8 @@ export const env = {
   INTERNAL_SECRET: required("INTERNAL_SECRET", "dev-internal-secret-change-me"),
 
   // AI provider — pluggable via single switch. No vendor lock-in.
-  // Supported: zai | groq | google | openrouter | together | ollama | none
-  AI_PROVIDER: (process.env.AI_PROVIDER ?? "zai").toLowerCase(),
+  // Supported: groq | google | openrouter | together | ollama | none
+  AI_PROVIDER: (process.env.AI_PROVIDER ?? "none").toLowerCase(),
   AI_MODEL: process.env.AI_MODEL ?? "",
   AI_BASE_URL: process.env.AI_BASE_URL ?? "",
   AI_API_KEY: process.env.AI_API_KEY ?? "",

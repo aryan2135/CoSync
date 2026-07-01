@@ -2,8 +2,6 @@
 
 > A production-grade collaborative document editor with **offline-first synchronization**, **deterministic conflict resolution (CRDTs)**, **granular version control**, and **role-based access control**.
 
-Built for the House of Edtech Fullstack Developer Assignment 2 (v2.1, April 2026).
-
 ---
 
 ## ✨ Key Features
@@ -37,23 +35,48 @@ Built for the House of Edtech Fullstack Developer Assignment 2 (v2.1, April 2026
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 20+ / Bun
-- PostgreSQL (production) or SQLite (development)
+- **Node.js 20+** or **Bun**
+- **PostgreSQL** (required for both development and production; SQLite is not supported due to Prisma enum type limitations in the schema)
 
 ### Installation
 
+**Using Bun:**
 ```bash
 bun install
 cp .env.example .env
 bun run db:push
 ```
 
+**Using npm:**
+```bash
+npm install
+cp .env.example .env
+npx prisma db push
+```
+
 ### Running
 
-```bash
-bun run dev                              # Next.js app on :3000
-cd mini-services/collab-service && bun run dev   # collab service on :3001
-```
+You need to run both the Next.js frontend and the collaboration service:
+
+#### Option A: Using Bun
+1. Start the Next.js app:
+   ```bash
+   bun run dev
+   ```
+2. Start the collaboration service (in a new terminal):
+   ```bash
+   bun run collab
+   ```
+
+#### Option B: Using npm/Node
+1. Start the Next.js app:
+   ```bash
+   npm run dev
+   ```
+2. Start the collaboration service (in a new terminal):
+   ```bash
+   npm run collab
+   ```
 
 ---
 
@@ -61,12 +84,12 @@ cd mini-services/collab-service && bun run dev   # collab service on :3001
 
 Set one env var to switch models:
 
-| Provider | Env | Free tier |
+| Provider | Env | Free tier / Details |
 |---|---|---|
-| Built-in (default) | `AI_PROVIDER=zai` | ✅ works immediately |
+| None (default) | `AI_PROVIDER=none` | ✅ disables AI features, works out-of-the-box |
 | Groq | `AI_PROVIDER=groq`, `AI_API_KEY=gsk_...` | ✅ Llama 3.3 70B |
 | Google Gemini | `AI_PROVIDER=google`, `AI_API_KEY=...` | ✅ Gemini 1.5 Flash |
-| Ollama (local) | `AI_PROVIDER=ollama` | ✅ no key needed |
+| Ollama (local) | `AI_PROVIDER=ollama` | ✅ local model running, no API key needed |
 
 ---
 
@@ -124,7 +147,3 @@ prisma/
 - LinkedIn: [aryan-dongre-29b858313](https://www.linkedin.com/in/aryan-dongre-29b858313/)
 
 ---
-
-## 📄 License
-
-MIT
